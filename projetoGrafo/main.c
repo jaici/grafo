@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "grafo_lib.h"
 
 int main()
 {
