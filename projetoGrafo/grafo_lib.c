@@ -63,3 +63,19 @@ void grafoShow(GrafoM* grafo)
         printf("\n");
     }
 }
+
+void geraArq(GrafoM* grafo)
+{
+    int col,lin;
+    FILE* fp = fopen("graphviz.dot","w");
+    fprintf(fp,"digraph G {\r\n");
+
+    for(lin=0;lin<grafo->vertice; lin++){
+        for(col=0;col<grafo->aresta; col++){
+            if(grafo->adj[lin][col]==1){
+                fprintf(fp," %2d -> %2d\r\n", lin,col);
+            }
+        }
+    }
+    fprintf(fp,"}");
+}

@@ -12,6 +12,6 @@ int main()
     grafoInsert(teste,3,2);
     grafoInsert(teste,5,6);
     grafoShow(teste);
-
+    geraArq(teste);
     return 0;
 }
