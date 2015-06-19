@@ -6,9 +6,9 @@
  * \return  *Grafo
  *
  */
-Grafo* init(int vert)
+GrafoM* init(int vert)
 {
-    Grafo* newGrafo = (Grafo*) malloc(sizeof(Grafo));
+    GrafoM* newGrafo = (GrafoM*) malloc(sizeof(GrafoM));
     newGrafo->vertice = vert;
     newGrafo->aresta = 0;
     newGrafo->adj = matrizInit(vert, vert, 0);
@@ -34,7 +34,7 @@ int **matrizInit(int linha, int coluna, int valor)
     return matriz;
 }
 
-void grafoInsert(Grafo* grafo, int linha, int coluna)
+void grafoInsert(GrafoM* grafo, int linha, int coluna)
 {
     if(grafo->adj[linha][coluna]==0){
         grafo->adj[linha][coluna] = 1;
@@ -42,7 +42,7 @@ void grafoInsert(Grafo* grafo, int linha, int coluna)
     }
 }
 
-void grafoRemove(Grafo* grafo, int linha, int coluna)
+void grafoRemove(GrafoM* grafo, int linha, int coluna)
 {
     if(grafo->adj[linha][coluna]==1){
         grafo->adj[linha][coluna] = 0;
@@ -50,7 +50,7 @@ void grafoRemove(Grafo* grafo, int linha, int coluna)
     }
 }
 
-void grafoShow(Grafo* grafo)
+void grafoShow(GrafoM* grafo)
 {
     int col,lin;
     for(lin=0;lin<grafo->vertice; lin++){

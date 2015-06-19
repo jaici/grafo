@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct grafo Grafo;
+typedef struct grafoM GrafoM;
 /**< DEFINIÇÃO DAS ESTRUTURAS */
-struct grafo{
+struct grafoM{
     int vertice;
     int aresta;
     int **adj;
 };
 
 /**< DEFINIÇÃO DAS FUNÇÕES */
-Grafo* init (int vert);
+GrafoM* init (int vert);
 int** matrizInit(int linha, int coluna, int valor);
-void grafoInsert(Grafo* grafo, int linha, int coluna);
-void grafoRemove(Grafo* grafo, int linha, int coluna);
-void grafoShow(Grafo* grafo);
+void grafoInsert(GrafoM* grafo, int linha, int coluna);
+void grafoRemove(GrafoM* grafo, int linha, int coluna);
+void grafoShow(GrafoM* grafo);
 
 
 #endif // GRAFO_LIB_H_INCLUDED
