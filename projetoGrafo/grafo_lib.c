@@ -34,6 +34,9 @@ int **matrizInit(int linha, int coluna, int valor)
     return matriz;
 }
 
+/** \brief  insere os vertices e suas arestas, ou seja, realiza ligacao entre dois vertices
+ *  \param   GrafoM* grafo, int linha, int coluna
+ */
 void grafoInsert(GrafoM* grafo, int linha, int coluna)
 {
     if(grafo->adj[linha][coluna]==0){
@@ -42,6 +45,9 @@ void grafoInsert(GrafoM* grafo, int linha, int coluna)
     }
 }
 
+/** \brief  remove um vertice com sua aresta, ou seja, remove uma ligação entre dois vertives
+ *  \param   GrafoM* grafo, int linha, int coluna
+ */
 void grafoRemove(GrafoM* grafo, int linha, int coluna)
 {
     if(grafo->adj[linha][coluna]==1){
@@ -49,7 +55,9 @@ void grafoRemove(GrafoM* grafo, int linha, int coluna)
         grafo->aresta--;
     }
 }
-
+/** \brief  exibe os vertices e suas ligacoes com os outros vertices
+ *  \param   GrafoM* grafo
+ */
 void grafoShow(GrafoM* grafo)
 {
     int col,lin;
@@ -63,7 +71,9 @@ void grafoShow(GrafoM* grafo)
         printf("\n");
     }
 }
-
+/** \brief  gera arquivo no formato para ser importado pelo programa graphviz.
+ *  \param   GrafoM* grafo
+ */
 void geraArq(GrafoM* grafo)
 {
     int col,lin;
@@ -78,4 +88,78 @@ void geraArq(GrafoM* grafo)
         }
     }
     fprintf(fp,"}");
+}
+/** \brief  liberar memória alocada
+ *  \param  GrafoM* grafo
+ */
+void liberaMem(GrafoM* grafo, int tam)
+{
+    int i;
+    for(i=0; i<tam; i++){       /**Questionar o professor sobre liberar memória*/
+        free(grafo->adj[i]);
+    }
+    free(grafo);
+}
+
+/** \brief  Cria novo nó que liga dois vertices
+ *  \param  int v2, No* n
+ *  \return No*
+ */
+No* novoNo(int v2,No* prox)
+{
+    No* newNo = (No*) malloc(sizeof(No));
+    newNo->vertice2 = v2;
+    newNo->prox = prox;
+    return newNo;
+}
+/** \brief  Inicializa grafo de lista
+ *  \param  int v
+ *  \return GrafoL*
+ */
+ /*
+ GrafoL* grafoLinit(int v)
+ {
+    int c;
+    GrafoL* newGrafo = (GrafoL*) malloc(sizeof(GrafoL));
+    newGrafo->vertice = v;
+    newGrafo->aresta = 0;
+    newGrafo->adj = (No*) malloc(v*sizeof(No));
+    for(c=0; c < v; c++){
+        newGrafo->adj[c] = NULL;
+    }
+    return newGrafo;
+ }
+
+void grafoLInsert(GrafoL* grafo, int v1, int v2)
+{
+    No* a;
+    for(a=grafo->adj[v1];a!= NULL; a=a->prox){
+        if(a->vertice2 == v2) return;
+    }
+    grafo->adj[v1] = novoNo(v2,grafo->adj[v1]);
+    grafo->aresta++;
+}*/
+
+void DIGRAPHbfs(GrafoM* G, int s)
+{
+    int v1, v2;
+    conta = 0;
+    for (v1 = 0; v1 < G->vertice; v1++)
+        lbl[v1] = -1;
+    filaInit( G->vertice);
+    lbl[s] = conta++;
+    filaPut(s);
+    printf(" %d \n", s);
+    while (!filaEmpty()) {
+        v1 = filaGet();
+        for (v2 = 0; v2 < G->vertice; v2++){
+            if (G->adj[v1][v2] == 1 && lbl[v2] == -1) {
+            printf(" %d ", v2);
+                lbl[v2] = conta++;
+                filaPut(v2);
+            }
+        }
+        printf("\n");
+    }
+    filaFree();
 }
